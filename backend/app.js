@@ -52,10 +52,10 @@ app.use("/api/companies", companyRoutes);
 app.use("/api/quotations", quotationRoutes);
 
 // Serve static files from React
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
 });
 
 // Connect DB & Start Server
