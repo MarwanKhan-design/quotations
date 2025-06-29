@@ -15,6 +15,7 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors({ origin: "*" }));
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
   res.send("Backend is working!");
@@ -24,4 +25,4 @@ app.use("/api/companies", companyRoutes);
 app.use("/api/quotations", quotationRoutes);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
-mongoose.connect(process.env.DB_URI, () => console.log("Connected to db"));
+mongoose.connect(process.env.DB_URI).then(() => console.log("Connected to db"));
