@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "postinstall": "cd ../client && npm install && npm run build"
+    "postinstall": "cd ../frontend && npm install && npm run build"
 
   },
   "keywords": [],
