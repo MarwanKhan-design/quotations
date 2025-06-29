@@ -16,6 +16,10 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors({ origin: "*" }));
 
+app.get("/", (req, res) => {
+  res.send("Backend is working!");
+});
+
 app.use("/api/companies", companyRoutes);
 app.use("/api/quotations", quotationRoutes);
 
