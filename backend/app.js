@@ -7,10 +7,10 @@ import mongoose from "mongoose";
 import companyRoutes from "./routes/companies.js";
 import quotationRoutes from "./routes/quotations.js";
 
-const app = express();
 dotenv.config();
 
-const port = process.env.PORT;
+const app = express();
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(morgan("dev"));
@@ -24,7 +24,13 @@ app.get("/", (req, res) => {
 app.use("/api/companies", companyRoutes);
 app.use("/api/quotations", quotationRoutes);
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+// Connect to DB and then start server
 mongoose
   .connect(process.env.DB_URI)
-  .then(() => console.log("Connected to db", process.env.DB_URI));
+  .then(() => {
+    console.log("Connected to db");
+    app.listen(port, () => console.log(`Listening on port ${port}`));
+  })
+  .catch((err) => {
+    console.error("Failed to connect to DB", err);
+  });
