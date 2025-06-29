@@ -29,11 +29,15 @@ import mongoose from "mongoose";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// Setup __dirname
+import companyRoutes from "./routes/companies.js";
+import quotationRoutes from "./routes/quotations.js";
+
+// Setup __dirname for ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dotenv.config();
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -43,27 +47,24 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
-// Routes
-import companyRoutes from "./routes/companies.js";
-import quotationRoutes from "./routes/quotations.js";
-
+// API Routes
 app.use("/api/companies", companyRoutes);
 app.use("/api/quotations", quotationRoutes);
 
 // ✅ Serve frontend
-app.use(express.static(path.join(__dirname, "./frontend/dist")));
+app.use(express.static(path.join(__dirname, "frontend/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./frontend/dist/index.html"));
+  res.sendFile(path.resolve(__dirname, "frontend/dist", "index.html"));
 });
 
-// ✅ DB + Start
+// ✅ Connect Mongo + Start server
 mongoose
   .connect(process.env.DB_URI)
   .then(() => {
-    console.log("Connected to DB");
-    app.listen(port, () => console.log(`Server running on port ${port}`));
+    console.log("✅ Connected to DB");
+    app.listen(port, () => console.log(`✅ Server running on port ${port}`));
   })
   .catch((err) => {
-    console.error("DB connection error", err);
+    console.error("❌ DB connection error:", err);
   });

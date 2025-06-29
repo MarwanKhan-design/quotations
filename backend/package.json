@@ -5,9 +5,10 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "postinstall": "cd frontend && npm install && npm run build"
-  },
+  "start": "node app.js",
+  "postinstall": "cd frontend && npm install && npm run build"
+},
+
   "keywords": [],
   "author": "",
   "license": "ISC",
