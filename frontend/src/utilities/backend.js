@@ -1,1 +1,1 @@
-export const backendUri = "http://localhost:8000/api";
+export const backendUri = "https://quotations-production.up.railway.app/api";
