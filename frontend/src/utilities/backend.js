@@ -1,1 +1,1 @@
-export const backendUri = "https://quotations-production.up.railway.app/api";
+export const backendUri = "https://quotations-7jn9.vercel.app/api";
