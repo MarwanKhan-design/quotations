@@ -14,7 +14,7 @@ const port = process.env.PORT;
 
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(cors({ origin: "*" }));
+app.use(cors());
 
 app.use("/api/companies", companyRoutes);
 app.use("/api/quotations", quotationRoutes);
